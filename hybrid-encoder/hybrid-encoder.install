@@ -1,0 +1,8 @@
+post_install() {
+  post_upgrade $1
+}
+
+post_upgrade() {
+  echo "If Hybrid crashes on application start, it might help to delete old settings in ~/.hybrid"
+  echo "The binary executable file is now called \"hybrid-encoder\" instead of \"Hybrid\""
+}
