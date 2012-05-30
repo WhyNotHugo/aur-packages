@@ -11,7 +11,11 @@ url="http://www.pyside.org"
 depends=("python2>=${_pyver}" "qt>=4.8" 'openssl') # 'generatorrunner>=0.6.16')
 optdepends=("python-sphinx: Documentation")
 makedepends=('cmake' 'automoc4')
+<<<<<<< HEAD
+conflicts=("apiextractor" "libshiboken")
+=======
 conflicts=('shiboken')
+>>>>>>> 22d9c7e907f9a154ab4137ac7acb2968b69fbda2
 provides=("apiextractor" "libshiboken" "shiboken")
 source=("http://www.pyside.org/files/shiboken-$pkgver.tar.bz2")
 md5sums=('fa451b6c4f3e06cce283a84550a96fd2')
