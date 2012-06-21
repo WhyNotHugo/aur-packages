@@ -12,7 +12,7 @@ url="http://www.pyside.org"
 _qtver=4.8
 depends=('shiboken>=1.1.1' 'python2' "qt>=${_qtver}" 'phonon' 'mesa')
 replaces=("pyside")
-makedepends=('cmake' 'automoc4' 'shiboken>=1.1.1')
+makedepends=('cmake' 'shiboken>=1.1.1')
 source=("http://www.pyside.org/files/${_pkgrealname}-qt${_qtver}+$pkgver.tar.bz2")
 md5sums=('0176d3746074afe47373d7302e1b4501')
 
