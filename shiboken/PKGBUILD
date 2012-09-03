@@ -22,7 +22,9 @@ build(){
     cmake ../ -DCMAKE_INSTALL_PREFIX=/usr  \
               -DCMAKE_BUILD_TYPE=Release   \
               -DBUILD_TESTS=OFF            \
-              -DPYTHON_EXECUTABLE=/usr/bin/python${_pyver}
+              -DPYTHON_EXECUTABLE=/usr/bin/python${_pyver} \
+              -DPYTHON_LIBRARY=/usr/lib/libpython${_pyver}.so \
+              -DPYTHON_INCLUDE_DIR=/usr/include/python${_pyver}
     make
 }
 
