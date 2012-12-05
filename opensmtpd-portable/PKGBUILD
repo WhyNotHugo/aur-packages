@@ -2,7 +2,7 @@
 
 pkgname=opensmtpd-portable
 _pkgname=opensmtpd
-pkgver=201211152324
+pkgver=201212031111
 _openbsdver=5.2.x
 pkgrel=1
 pkgdesc='A FREE implementation of the server-side SMTP protocol'
@@ -16,9 +16,10 @@ backup=("etc/smtpd.conf")
 source=(http://www.opensmtpd.org/archives/${_pkgname}-${pkgver}p1.tar.gz
         smtpd.rc
 	smtpd.service)
-md5sums=('4385bec95f8dead9cefb45f10f4cf8fd'
+md5sums=('b4b02145b9782550f91c58c90bfe1f3b'
          '6c0093d42aa11b58670d0bbef069a64c'
 	 '636da7986f5ec40b80e72b71a6a7ac59')
+install="${pkgname}.install"
 
 build() {
   export LDFLAGS="-lrt -Wl,-O1,--sort-common,--as-needed,-z,relro"
