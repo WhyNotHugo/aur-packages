@@ -19,6 +19,7 @@ source=(http://www.opensmtpd.org/archives/${_pkgname}-${pkgver}p1.tar.gz
 md5sums=('4cac13db7f0a78b5e6718be2114a68ed'
          '6c0093d42aa11b58670d0bbef069a64c'
 	 '636da7986f5ec40b80e72b71a6a7ac59')
+install="${pkgname}.install"
 
 build() {
   export LDFLAGS="-lrt -Wl,-O1,--sort-common,--as-needed,-z,relro"
