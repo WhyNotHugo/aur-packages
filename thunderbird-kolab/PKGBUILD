@@ -5,7 +5,7 @@ pkgrel=1
 pkgdesc="Synchronize the address book and calendar with IMAP folder"
 arch=('any')
 url="http://synckolab.mozdev.org/"
-license=('MPL 1.1/GPL 2.0/LGPL 2.1 ')
+license=('MPL 1.1' 'GPL 2.0' 'LGPL 2.1 ')
 depends=('thunderbird>=10')
 options=(!strip)
 _tb_version=$(pacman -Qi thunderbird|grep Version|cut -f 2 -d ":"|cut -f 2 -d " "|cut -f 1 -d -)
