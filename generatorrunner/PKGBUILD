@@ -1,4 +1,5 @@
-# Maintainer: Matthias Maennich <arch@maennich.net>
+# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Contributor: Matthias Maennich <arch@maennich.net>
 # Contributor: Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
 pkgname=generatorrunner
 pkgver=0.6.16

@@ -1,5 +1,5 @@
-# $Id$
-# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
 
 pkgname=remmina-gtk2
 pkgver=1.0.0
