@@ -2,7 +2,7 @@
 
 pkgname=opensmtpd-portable
 _pkgname=opensmtpd
-pkgver=201302212015
+pkgver=201303011853
 _openbsdver=5.2.x
 pkgrel=2
 pkgdesc='A FREE implementation of the server-side SMTP protocol'
@@ -17,7 +17,7 @@ backup=("etc/smtpd.conf")
 source=(http://www.opensmtpd.org/archives/${_pkgname}-${pkgver}p1.tar.gz
         smtpd.rc
 	smtpd.service)
-md5sums=('fecf7415e0bbebb90986c2b67d0b5c9f'
+md5sums=('ffd1fd79f680de70b686adb7ee25b0e7'
          '6c0093d42aa11b58670d0bbef069a64c'
          '636da7986f5ec40b80e72b71a6a7ac59')
 install="${pkgname}.install"
@@ -29,7 +29,7 @@ build() {
   cd "${srcdir}/${_pkgname}"-${_openbsdver}p1
 
   ./bootstrap
-  ./configure --prefix=/usr --sysconfdir=/etc
+  ./configure --prefix=/usr --sysconfdir=/etc --with-pam
 
   make
 }
@@ -41,6 +41,7 @@ package() {
   cd "$srcdir/$_pkgname"-${_openbsdver}p1
   make DESTDIR="${pkgdir}/" install
 
+  rm -rf ${pkgdir}usr/libexec
   ln -s smtpctl ${pkgdir}/usr/sbin/sendmail
 }
 
