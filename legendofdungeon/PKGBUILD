@@ -13,7 +13,7 @@ url="http://www.robotloveskitty.com/LoD/"
 license=('custom')
 depends=()
 makedepends=("unzip")
-source=("LegendofDungeon-AlphaKitten-Linux.zip")
+source=(LegendofDungeon-AlphaKitten-Linux.zip::)
 md5sums=('77d69231224c2398b6bd55a8bfa7c947')
 
 package() {
