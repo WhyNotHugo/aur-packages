@@ -17,8 +17,8 @@ md5sums=('005bb243efd7fd4216f478fbc6665167'
 build() {
   cd $srcdir/silicon-${pkgver}-src
   patch -p0 < ../qtlocalpeer.diff
-  cmake ./ -DCMAKE_BUILD_TYPE=release \
-        -DCMAKE_INSTALL_PREFIX=/usr \ 
+  cmake . -DCMAKE_BUILD_TYPE=release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
         -DQT_QMAKE_EXECUTABLE=qmake4
 
   make
