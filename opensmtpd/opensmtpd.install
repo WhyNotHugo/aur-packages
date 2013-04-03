@@ -1,0 +1,8 @@
+post_install() {
+  groupadd -r _smtpd
+  useradd -r -g _smtpd -c "SMTP daemon" -d /var/empty -s /sbin/nologin _smtpd
+  useradd -r -g _smtpd -c "SMTP queue user" -d /var/empty -s /sbin/nologin _smtpq
+  useradd -r -g _smtpd -c "SMTP filter user" -d /var/empty -s /sbin/nologin _smtpf
+
+  chown -R _smtpd:_smtpd /etc/mail
+}
