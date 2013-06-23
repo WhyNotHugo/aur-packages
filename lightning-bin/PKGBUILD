@@ -5,7 +5,7 @@ pkgver=1.9.1
 pkgrel=1
 pkgdesc="A version of Mozilla Sunbird integrated with Thunderbird"
 arch=('i686' 'x86_64')
-url="http://www.mozilla.org/projects/calendar/lightning/"
+url="https://blog.mozilla.org/calendar/"
 license=('MPL' 'GPL' 'LGPL')
 depends=('thunderbird>=17' 'libnotify')
 makedepends=()
