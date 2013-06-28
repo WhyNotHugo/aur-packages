@@ -10,21 +10,14 @@ license=('LGPL-2.1')
 options=('!libtool')
 depends=('vlc')
 makedepends=('npapi-sdk' 'git')
+source=(git://git.videolan.org/$pkgname.git#tag=${pkgver})
+md5sums=('SKIP')
 
 # This packages uses git because there is no official tarball,
 # but it still builds $pkgver by fetching the appropiate tag.
 
-prepare() {
-  git clone --depth 1 git://git.videolan.org/$pkgname.git
-  cd "$pkgname"
-
-  git fetch --tags
-  git checkout -q $pkgver
-
-}
-
 build() {
-  cd "$pkgname"
+  cd "$srcdir/$pkgname"
 
   ./autogen.sh
   ./configure --prefix=/usr
@@ -32,6 +25,6 @@ build() {
 }
 
 package() {
-  cd $pkgname
-  make DESTDIR="$pkgdir" install	
+  cd "$srcdir/$pkgname"
+  make DESTDIR="$pkgdir" install
 }
