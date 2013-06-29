@@ -2,8 +2,7 @@
 
 pkgname=opensmtpd-snapshot
 _pkgname=opensmtpd
-pkgver=201305171950p1
-_pkgver=5.3.1p1
+pkgver=201306271531p1
 pkgrel=2
 pkgdesc='A FREE implementation of the server-side SMTP protocol. Latest snapshot.'
 arch=('i686' 'x86_64')
@@ -18,32 +17,43 @@ backup=("etc/mail/smtpd.conf")
 source=(http://www.opensmtpd.org/archives/${_pkgname}-${pkgver}.tar.gz
         smtpd.service
         smtpd.conf.patch)
-md5sums=('7f321480b7402679da14788abacdf921'
-         '636da7986f5ec40b80e72b71a6a7ac59'
-         'ed249a24aa13081130e77f19c5b2d968')
+sha256sums=('4c831a87b0d6834410b01a0ef13adeca9539391b341b50648aca1a53f6df062c'
+            '04915a2783cf98fe39ea00cecbabe94e7e43cc9351ab2196acaf84c5df499e1d'
+            'ed80a119604fe1fd848c587a3f86411edc71af80aea8fcb12ea17b810011c9e2')
 install="${pkgname}.install"
 depends=('libevent' 'sqlite')
 
 build() {
-  export LDFLAGS="-lrt -Wl,-O1,--sort-common,--as-needed,-z,relro"
+  cd "${srcdir}/${_pkgname}-${pkgver}"
 
-  cd "${srcdir}/${_pkgname}-${_pkgver}"
-
-  ./bootstrap
-  ./configure --prefix=/usr --sysconfdir=/etc/mail --with-pam
-
+  ./configure --prefix=/usr \
+              --sysconfdir=/etc/mail \
+              --sbindir=/usr/bin \
+              --with-pam
   make
 }
 
 package() {
-  install -Dm 644 smtpd.service ${pkgdir}/usr/lib/systemd/system/smtpd.service
+  cd "$srcdir/$_pkgname-${pkgver}"
+  make DESTDIR="${pkgdir}/" install
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+
+  install -dm711 "$pkgdir/var/spool/smtpd"
+  install -Dm 644 "$srcdir/smtpd.service" "${pkgdir}/usr/lib/systemd/system/smtpd.service"
+
   install -dm 700 "${pkgdir}/etc/mail"
 
-  cd "$srcdir/$_pkgname-${_pkgver}"
-  make DESTDIR="${pkgdir}/" install
+  # Install empty db files
+  install -Dm644 /dev/null "$pkgdir/etc/mail/aliases"
+  install -Dm644 /dev/null "$pkgdir/etc/mail/virtual"
+  install -Dm640 /dev/null "$pkgdir/etc/mail/secrets"
 
-  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  cd "$pkgdir/etc/mail/"
+  #makemap aliases
+  #makemap virtual
+  #makemap secrets
 
-  ln -s smtpctl "${pkgdir}/usr/sbin/sendmail"
+  ln -s smtpctl "${pkgdir}/usr/bin/sendmail"
 }
 
