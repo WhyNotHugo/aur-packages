@@ -3,7 +3,7 @@
 
 pkgname=python2-pywapi
 _pkgname=pywapi
-pkgver=0.2.2
+pkgver=0.3.3
 pkgrel=1
 pkgdesc="Python 2 weather API"
 arch=('any')
@@ -11,7 +11,7 @@ url="https://code.google.com/p/python-weather-api/"
 license=('GPL')
 depends=('python2')
 source=("http://python-weather-api.googlecode.com/files/${_pkgname}-$pkgver.tar.gz")
-md5sums=('bd8e1bc8afc64c0047e0172008e5aa76')
+md5sums=('bb2f1c249680830a4ec5602fc5d73fed')
 
 build() {
   cd "$srcdir/${_pkgname}-$pkgver"
