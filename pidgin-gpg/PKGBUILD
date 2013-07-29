@@ -1,18 +1,24 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
 
 pkgname=pidgin-gpg
-pkgver=0.9.1
+_pkgname=Pidgin-GPG
+pkgver=52.73718f5
 pkgrel=1
 pkgdesc="Transparently encrypts your instant messages with RSA encryption. Easy-to-use, but very secure."
 arch=(i686 x86_64)
 url="https://github.com/hobarrera/pidgin-gpg"
 license=('unknown')
 depends=(pidgin)
-source=(https://github.com/hobarrera/$pkgname/archive/$pkgver.tar.gz)
-md5sums=('98e4ac9f8dcc323fcd84ba8dc8182ff9')
+source=(git:git+ssh://git@github.com/segler-alex/Pidgin-GPG.git)
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$_pkgname"
 
   autoreconf -i
   ./configure
@@ -20,6 +26,6 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$_pkgname"
   install -Dm 644 src/.libs/pidgin_gpg.so "$pkgdir/usr/lib/pidgin/pidgin_gpg.so"
 }
