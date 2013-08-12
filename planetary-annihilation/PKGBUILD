@@ -5,7 +5,7 @@
 # PKGBUILD to work, since PA is propietary software.
 
 pkgname=planetary-annihilation
-_alphaver=50256
+_alphaver=51531
 pkgver=alpha${_alphaver}
 pkgrel=1
 pkgdesc="RTS gameplay in a way that's never been seen before."
@@ -31,4 +31,6 @@ package() {
 }
 
 md5sums=('77c794fd342870c570fc340b03f6ef7a'
+         'c68a1185aaa237a8924201bf98937e95')
+md5sums=('7c707d052766a872cfa901201c76ec38'
          'c68a1185aaa237a8924201bf98937e95')
