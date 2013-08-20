@@ -1,0 +1,88 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Contributor: David Morgan
+# Contributor: Joel Pedraza <joel@joelpedraza.com>
+# Contributor: Dieter Hsu <dieterplex@gmail.com>
+
+pkgname=eclipse-m2e
+pkgver=1.4.0
+pkgrel=2
+_builddate=20130601
+_buildtime=0317
+_pkgver=${pkgver}.${_builddate}-${_buildtime}
+pkgdesc="Maven Integration for Eclipse"
+arch=('i686' 'x86_64')
+url="http://eclipse.org/m2e"
+license=('EPL')
+depends=('eclipse-wtp-wst')
+replaces=('eclipse-m2eclipse')
+_url="http://download.eclipse.org/technology/m2e/releases/1.4/${_pkgver}"
+_kepler_url="http://download.eclipse.org/releases/kepler/201306260900/"
+source=(
+"${_url}/features/org.eclipse.m2e.feature_${_pkgver}.jar"
+"${_url}/features/org.eclipse.m2e.logback.feature_${_pkgver}.jar"
+"${_url}/features/org.eclipse.m2e.sdk.feature_${_pkgver}.jar"
+"${_url}/plugins/com.ning.async-http-client_1.6.5.20130531-2315.jar"
+"${_url}/plugins/org.jboss.netty_3.2.5.Final-20130531-2315.jar"
+"${_url}/plugins/org.eclipse.m2e.archetype.common_${pkgver}.20130531-2315.jar"
+"${_url}/plugins/org.eclipse.m2e.core.ui_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.core_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.discovery_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.editor.xml_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.editor_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.jdt_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.launching_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.lifecyclemapping.defaults_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.logback.appender_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.logback.configuration_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.maven.indexer_${pkgver}.20130531-2315.jar"
+"${_url}/plugins/org.eclipse.m2e.maven.runtime_${pkgver}.20130531-2315.jar"
+"${_url}/plugins/org.eclipse.m2e.model.edit_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.refactoring_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.scm_${_pkgver}.jar"
+"${_url}/plugins/org.eclipse.m2e.tests.common_${_pkgver}.jar"
+"${_kepler_url}/plugins/org.slf4j.api_1.7.2.v20121108-1250.jar")
+noextract=(${source[@]##*/});
+
+md5sums=('3165c701ad35e9a455cfb3a79c8d6b5e'
+         '71371579c4664ca16797c9468aaa3a98'
+         'dfba9c43b7ec27828bda9f5932fab688'
+         '9acaa0b13475a7b4775db62cdd267a2c'
+         '94949173b7db677278a8a5bdc4337526'
+         'a256708444a0b538f4c058e5a9e62786'
+         'c4bd4097eef938287c3400fe019c79fe'
+         'cff6651d77fdf0999ced9d31194a56f9'
+         '99dca342c85e44e4920ed5306cc74925'
+         'c6e904c2557bb8f9e77f20947cb70b1c'
+         'c9306bb43f41fe327c6feb849a526c6d'
+         'b0f3e55f5de3381c6d938c65a1c9725e'
+         '273fccf913cf1bdfcd0dc49c0b6c251e'
+         'e276602b2ab63feb4cb7d18ec3a69e36'
+         '15d29b3a3933fa29a79605a34df6179b'
+         '2e77e05b67ecba8bda3786c729fa0ae6'
+         '97ac0c178c3601e15882dd6416db89b4'
+         'f26de05bb7fdae4f1b149cf22c5a2071'
+         'c83620b55e7e6acbc7730a45acf3b7c5'
+         'bb7e7935176ddee6c6f769cb637ee921'
+         'c36dba1f9e3198610167bf55aaf75896'
+         'c4eb8aa093f88a72e582194fdb569c78'
+         'bdb1735bfea0fb2876c8aee53489654d')
+
+package() {
+  _dest=${pkgdir}/usr/share/eclipse/dropins/m2e/eclipse
+  install -dm755 ${_dest}/plugins
+
+  for url in ${source[@]}
+  do
+    _file="${url##*/}"
+    _type="${url%/*}"
+    _type="${_type##*/}"
+
+    if [ ${_type} == 'features' ]; then
+      install -dm755 ${_dest}/features/${_file/.jar}
+      cd ${_dest}/features/${_file/.jar}
+      jar xf ${srcdir}/${_file}
+    else
+      install -m644 ${srcdir}/${_file} ${_dest}/plugins
+    fi
+  done
+}
