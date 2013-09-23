@@ -1,7 +1,8 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
 # Contributor: Simon 'ALSimon' Gilliot <simon@gilliot.fr>
 
-pkgname=transmission-remote-gtk
+pkgname=transmission-remote-gtk2
+_pkgname=transmission-remote-gtk
 pkgver=1.1.1
 pkgrel=1
 pkgdesc="GTK application for remote management of the Transmission BitTorrent client via its RPC interface."
@@ -12,17 +13,18 @@ depends=('json-glib' 'curl' 'libproxy' 'libnotify' 'gtk2' 'geoip' 'desktop-file-
 makedepends=('intltool')
 install="${pkgname}.install"
 options=('!libtool')
-source=("http://transmission-remote-gtk.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
+conflicts=("transmission-remote-gtk")
+source=("http://transmission-remote-gtk.googlecode.com/files/${_pkgname}-${pkgver}.tar.gz")
 md5sums=('61c44578ad059d8ba4758806805c164e')
 
 build()
 {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${_pkgname}-${pkgver}"
   ./configure --prefix=/usr --sysconfdir=/etc --enable-gtk2
   make
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${_pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }
