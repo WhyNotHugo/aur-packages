@@ -1,0 +1,31 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Contributor: Joey Mazzarelli <mazzarelli@gmail.com>
+pkgname=jsmin
+pkgver=14.1bf6ce5
+pkgrel=1
+pkgdesc="A filter which removes comments and unnecessary whitespace from JavaScript  files."
+arch=('i686' 'x86_64')
+url="https://github.com/douglascrockford/JSMin"
+license=('custom')
+source=("git+ssh://git@github.com/douglascrockford/JSMin.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/JSMin"
+  printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$srcdir/JSMin"
+  gcc -o jsmin jsmin.c
+
+}
+
+package() {
+  cd "$srcdir/JSMin"
+
+  head -n 24 jsmin.c | tail -n 21 > COPYING
+  install -D jsmin $pkgdir/usr/bin/jsmin
+  install -D -m 644 COPYING $pkgdir/usr/share/licenses/$pkgname/COPYING
+  install -D -m 644 README $pkgdir/usr/share/doc/$pkgname/README
+}
