@@ -29,6 +29,9 @@ build() {
   ./configure --prefix=/usr \
               --sysconfdir=/etc/mail \
               --sbindir=/usr/bin \
+              --with-privsep-path=/var/empty \
+              --with-privsep-user=_smtpd \
+              --with-queue-user=_smtpq \
               --with-pam
   make
 }
