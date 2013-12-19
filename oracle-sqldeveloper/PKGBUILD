@@ -18,7 +18,7 @@ source=(manual://sqldeveloper-$pkgver-no-jre.zip
         oracle-sqldeveloper.sh
         LICENSE
         java_home.patch)
-DLAGENTS+=('manual::/usr/bin/echo The source file for this package need to be downloaded manually, since it requires a login and is not redistributable.;/usr/bin/echo Please visit http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html.; exit 1;')
+DLAGENTS+=('manual::/usr/bin/echo The source file for this package needs to be downloaded manually, since it requires a login and is not redistributable.;/usr/bin/echo Please visit http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html.; exit 1;')
 md5sums=('d9f85e60f70f9b054f977864d12774a9'
          'ad6bcd164b9f40f4c822a520c817a35c'
          'a73ee0987b0faa7d789d03b72ce4f3d0'
