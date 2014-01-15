@@ -4,7 +4,7 @@
 pkgname=thunderbird-lightning-bin
 pkgver=2.6.4
 pkgrel=1
-pkgdesc="A version of Mozilla Sunbird integrated with Thunderbird"
+pkgdesc="A calendar that's fully integrated into Thunderbird."
 arch=('i686' 'x86_64')
 url="https://blog.mozilla.org/calendar/"
 license=('MPL' 'GPL' 'LGPL')
@@ -18,17 +18,18 @@ source=(lightning-$pkgver.xpi::https://ftp.mozilla.org/pub/mozilla.org/calendar/
 sha1sums=('dc4a2fd2fb1789374795ff95b64c980c7f62f898')
 
 package() {
-	mkdir -p ${pkgdir}/usr/lib/thunderbird/extensions/${pkgname}
-	cd ${pkgdir}/usr/lib/thunderbird/extensions/${pkgname}
-	bsdtar -x -f ${srcdir}/lightning-$pkgver.xpi
+  mkdir -p ${pkgdir}/usr/lib/thunderbird/extensions/${pkgname}
+  cd ${pkgdir}/usr/lib/thunderbird/extensions/${pkgname}
+  bsdtar -x -f ${srcdir}/lightning-$pkgver.xpi
 
-	_emid=$(grep em:id install.rdf | tail -n 1 | sed 's/.*>\(.*\)<.*/\1/')
-	cd ../
-	mv ${pkgname} ${_emid}
-	cd ${_emid}
+  _emid=$(grep em:id install.rdf | tail -n 1 | sed 's/.*>\(.*\)<.*/\1/')
+  cd ../
+  mv ${pkgname} ${_emid}
+  cd ${_emid}
 
-	# Fix permissions
-	find -type d -exec chmod 0755 \{\} \+
-	find -type f -exec chmod 0644 \{\} \+
-	find -name '*.so' -exec chmod 0755 \{\} \+
+  # Fix permissions
+  find -type d -exec chmod 0755 \{\} \+
+  find -type f -exec chmod 0644 \{\} \+
+  find -name '*.so' -exec chmod 0755 \{\} \+
+  chown -R root:root .
 }
