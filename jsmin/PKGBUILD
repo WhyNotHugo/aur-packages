@@ -1,5 +1,6 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 # Contributor: Joey Mazzarelli <mazzarelli@gmail.com>
+
 pkgname=jsmin
 pkgver=14.1bf6ce5
 pkgrel=1

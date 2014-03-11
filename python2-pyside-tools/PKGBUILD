@@ -1,6 +1,7 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 # Contributor: Matthias Maennich <arch@maennich.net>
 # Contributor: Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
+
 _pkgrealname=pyside-tools
 pkgname=python2-$_pkgrealname
 pkgver=0.2.14
@@ -18,7 +19,7 @@ md5sums=('0a683e1dc426df5834cb1e540d0c6e3f')
 
 build(){
     cd $srcdir/${_pkgrealname}-$pkgver
-    sed -e "s/python/python2/g" -i pyside-uic 
+    sed -e "s/python/python2/g" -i pyside-uic
     mkdir -p build && cd build
     cmake ../ -DCMAKE_INSTALL_PREFIX=/usr \
               -DCMAKE_BUILD_TYPE=Release \

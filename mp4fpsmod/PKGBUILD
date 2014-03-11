@@ -1,5 +1,4 @@
-# $Id$
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=mp4fpsmod
 pkgver=0.14
@@ -23,8 +22,8 @@ build() {
   make
   popd
   make LIBPATH=-L./mp4v2/.libs
-  strip mp4fpsmod 
+  strip mp4fpsmod
 
-  install -D -m755 mp4fpsmod ${pkgdir}/usr/bin/mp4fpsmod  
+  install -D -m755 mp4fpsmod ${pkgdir}/usr/bin/mp4fpsmod
   install -D -m644 COPYING ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
 }

@@ -1,4 +1,4 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=libvcard
 pkgver=1.0.2
@@ -13,7 +13,7 @@ md5sums=('91f7fa5f3c01f62c56133883c98b33b4')
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   qmake PREFIX=/usr
-  make	
+  make
 }
 
 package() {

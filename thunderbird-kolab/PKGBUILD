@@ -1,4 +1,5 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+
 pkgname=thunderbird-kolab
 pkgver=1.5.4
 pkgrel=1

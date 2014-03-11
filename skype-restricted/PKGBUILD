@@ -1,4 +1,4 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 # Contributor: Jaroslaw Swierczynski <swiergot@aur.archlinux.org>
 # Contributor: Daenyth <Daenyth+Arch AT gmail DOT com>
 
@@ -37,7 +37,7 @@ package() {
 
   if [[ $CARCH == i686 ]]; then
 	  libdir="usr/lib"
-  
+
       # FS#33417 - Skype wants qtwebkit 2.2.x
       install -Dm755 "${srcdir}"/libQtWebKit.so.4 "${pkgdir}"/usr/share/skype/lib/libQtWebKit.so.4
   else

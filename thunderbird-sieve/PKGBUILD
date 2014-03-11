@@ -1,4 +1,5 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+
 pkgname=thunderbird-sieve
 pkgver=0.2.2
 pkgrel=1

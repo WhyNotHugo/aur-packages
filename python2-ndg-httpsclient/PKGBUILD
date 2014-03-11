@@ -1,4 +1,5 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+
 pkgname=python2-ndg-httpsclient
 _pkgname=ndg_httpsclient
 pkgver=0.3.2

@@ -1,4 +1,4 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=dontstarve
 pkgver=1383879308
@@ -21,9 +21,9 @@ md5sums=('a37c4d9c7425bef34d596dd8c09f5827'
 
 build() {
   cd "$srcdir/curl-${_curlver}"
-  ./configure                  
-  make                         
-}            
+  ./configure
+  make
+}
 
 package() {
   cd "$srcdir/$pkgname"

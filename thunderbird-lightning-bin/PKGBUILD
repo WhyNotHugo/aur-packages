@@ -1,5 +1,6 @@
-# Maintainer: Hugo Osvaldo Barrera <hugo@osvaldobarrera.com.ar>
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 # Contributor: Joel Goguen <jgoguen (at-sign) jgoguen (period) ca>
+
 pkgname=thunderbird-lightning-bin
 pkgver=2.6.4
 pkgrel=1
