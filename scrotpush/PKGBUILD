@@ -1,0 +1,19 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+
+pkgname=scrotpush
+pkgver=1.0
+pkgrel=1
+pkgdesc="Push screenshot to imgur and copy it's url"
+arch=('any')
+url="https://github.com/hobarrera/scrotpush"
+license=('BSD')
+depends=('python2-requests' 'python2-xdg' 'libnotify' 'xclip')
+source=("https://github.com/hobarrera/${pkgname}/archive/v${pkgver}.zip")
+md5sums=('a4328a63f7ddefcfea026ce418ec7f78')
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  install -Dm 755 scrotpush.py "$pkgdir/usr/bin/scrotpush"
+  install -Dm 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
