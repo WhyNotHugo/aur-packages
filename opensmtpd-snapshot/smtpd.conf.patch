@@ -1,8 +1,4 @@
-12c12
-< table aliases db:/etc/mail/aliases.db
+5c5
+< listen on localhost
 ---
-> #table aliases db:/etc/mail/aliases.db
-17c17
-< accept for local alias <aliases> deliver to mbox
----
-> accept for local deliver to mbox
+> listen on lo
