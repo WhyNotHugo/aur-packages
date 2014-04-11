@@ -1,7 +1,7 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname="usrc.d"
-pkgver=1.5.865e763
+pkgver=latest
 pkgrel=1
 pkgdesc="A set of script for managing a user session (and user-session daemons)."
 url="git+ssh://git@github.com/hobarrera/usrc.d.git"
