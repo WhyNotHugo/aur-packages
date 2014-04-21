@@ -6,7 +6,7 @@ pkgver=2.6.4
 pkgrel=1
 pkgdesc="A calendar that's fully integrated into Thunderbird."
 arch=('i686' 'x86_64')
-url="https://blog.mozilla.org/calendar/"
+url="https://www.mozilla.org/en-US/projects/calendar/"
 license=('MPL' 'GPL' 'LGPL')
 depends=('thunderbird>=24.1.1' 'libnotify')
 makedepends=()
