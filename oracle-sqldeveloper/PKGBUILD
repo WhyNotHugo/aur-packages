@@ -7,7 +7,7 @@
 
 pkgname=oracle-sqldeveloper
 pkgver=4.0.1.14.48
-pkgrel=1
+pkgrel=2
 pkgdesc="A graphical tool for database development"
 arch=('any')
 url="http://www.oracle.com/technology/products/database/sql_developer/index.html"
