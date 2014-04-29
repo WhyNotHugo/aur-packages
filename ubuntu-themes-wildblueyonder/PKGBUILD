@@ -23,7 +23,7 @@ md5sums=('9f5b751c1a072708ae2d1d3618eb4f01'
 prepare () {
   cd "$srcdir"/${_pkgname}-${pkgver}/
 
-  patch Ambiance/gtk-2.0/gtkrc -i "$srcdir/gtk2.patch"
+  patch Ambiance/gtk-2.0/gtkrc -i ../gtk2.patch
   patch -Np0 -i "../gtk3.patch"
 
   sed -i 's|^\(#!.*python$\)|\12|g' scavenge.py
