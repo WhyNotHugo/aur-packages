@@ -25,6 +25,7 @@ md5sums=('e772b3547fdc3a6e32f81e7303422fd1'
          'fe4f06707eb1eff509d3dce965019528'
          '04a62702b59810a36bca7623bf9e932c'
          'f8c055be2f047ff4aaffdd028f62f027')
+PKGEXT=".pkg.tar"
 
 if [[ "$CARCH" == "x86_64" ]]; then
   source[1]=$pkgname-$pkgver-$CARCH.tar.gz::http://d35ac8ww5dfjyg.cloudfront.net/playground/bins/$pkgver/LightTableLinux64.tar.gz
