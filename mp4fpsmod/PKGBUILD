@@ -1,28 +1,35 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=mp4fpsmod
-pkgver=0.14
+pkgver=0.24
 pkgrel=1
 pkgdesc="Simple CLI MP4 time code editor"
 arch=('any')
 license=('custom')
+source=("git+ssh://git@github.com/nu774/${pkgname}.git#tag=v${pkgver}")
 url="https://sites.google.com/site/qaacpage/junk"
 makedepends=('git')
+md5sums=('SKIP')
 
-build() {
-  cd "${srcdir}"
+prepare() {
+  cd "$srcdir/$pkgname/mp4v2"
 
-  git clone git://github.com/nu774/${pkgname}.git
-  cd ${pkgname}
-  git checkout v${pkgver}
-
-  pushd mp4v2
   ./make_configure
   ./configure --enable-shared=no --disable-util
+}
+
+build() {
+  cd "$srcdir/$pkgname/mp4v2"
   make
-  popd
+
+  cd "$srcdir/$_pkgname"
   make LIBPATH=-L./mp4v2/.libs
+
   strip mp4fpsmod
+}
+
+package() {
+  cd "$srcdir/$pkgname"
 
   install -D -m755 mp4fpsmod ${pkgdir}/usr/bin/mp4fpsmod
   install -D -m644 COPYING ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
