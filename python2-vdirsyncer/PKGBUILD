@@ -2,7 +2,7 @@
 
 pkgname=python2-vdirsyncer
 _pkgname=vdirsyncer
-pkgver=0.1.4
+pkgver=0.1.5
 pkgrel=1
 pkgdesc="Synchronize CalDAV and CardDAV."
 arch=('any')
@@ -10,7 +10,7 @@ url="https://github.com/untitaker/vdirsyncer"
 license=('ISC')
 depends=('python2-argvard' 'python2-setuptools')
 source=("https://github.com/untitaker/${_pkgname}/archive/${pkgver}.zip")
-md5sums=('765c8476f054c8827a9924e94e4e469b')
+md5sums=('f498570feaab6a91078933dacb52fb6c')
 
 build() {
   cd "$srcdir/${_pkgname}-$pkgver"
