@@ -55,7 +55,7 @@ package() {
   install -m644 "$srcdir/content.json" media/shaders
 
   echo "void wrap(){}" | cc -fPIC -shared -Wl,-soname,libdummyudev.so.0 \
-    -o "host/libudev.so.0" -xc -
+    -o "${pkgdir}/opt/PA/host/libudev.so.0" -xc -
 }
 
 md5sums=('4ebe87a4c67d63199e6d34c1481d9526'
