@@ -7,7 +7,7 @@
 # https://store.uberent.com/download/pa
 
 pkgname=planetary-annihilation
-_realver=64498
+_realver=66567
 pkgver=0.${_realver}
 _curlver=7.23.0
 pkgrel=1
@@ -68,7 +68,7 @@ package() {
     -o "host/libudev.so.0" -xc -
 }
 
-md5sums=('9c9cee134a676f9e2fcacaf3e07fa301'
+md5sums=('4ebe87a4c67d63199e6d34c1481d9526'
          '115337eb3c98d32e5317b499205955d7'
          '018a9acee77ed70017c6f6cec855635a'
          '16b2acc35fe4cd6fa06aff57b4a6fdc4'
