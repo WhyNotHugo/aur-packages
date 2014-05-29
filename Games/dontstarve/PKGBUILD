@@ -12,12 +12,15 @@ depends=()
 makedepends=()
 optdepends=()
 options=(!strip)
-source=("humble://${pkgname}_x64_$pkgver.tar.gz"
+source=("${pkgname}_x64_$pkgver.tar.gz::"
         "http://curl.haxx.se/download/curl-${_curlver}.tar.gz"
-        "dontstarve.sh")
+        "dontstarve.sh"
+        "dontstarve.desktop")
 md5sums=('7d5e1d6f66ec76eae96ab8af2673f600'
          '018a9acee77ed70017c6f6cec855635a'
-         'f2949327f3778ffbefb68fb61c10aee7')
+         'f2949327f3778ffbefb68fb61c10aee7'
+         'e1211feede8e6b0ce174cd56517f4689')
+PKGEXT=".pkg.tar"
 
 build() {
   cd "$srcdir/curl-${_curlver}"
@@ -27,6 +30,9 @@ build() {
 
 package() {
   cd "$srcdir/$pkgname"
+
+  install -Dm 644 dontstarve.xpm "$pkgdir/usr/share/icons/dontstarve.xpm" 
+  install -Dm 644 ../dontstarve.desktop "$pkgdir/usr/share/applications/dontstarve.desktop"
 
   install -dm 755 "$pkgdir/opt/dontstarve/"
   find . -type f -exec install -D {} "$pkgdir/opt/dontstarve/{}" \;
