@@ -16,8 +16,7 @@ public class MinecraftIPv6 {
 	public static void main(String[] args) throws IOException {
 		// This is an IPv6 launcher, force IPv6, no matter what.
 		System.setProperty("java.net.preferIPv6Addresses", "true");
-		// Unnecesary?:
-		// System.setProperty("java.net.preferIPv4Stack", "false");
+		System.setProperty("java.net.preferIPv4Stack", "false");
 
 		// InetAddress reads on it's first usage. If it's not used here,
 		// Bootstrap will override it before using InetAddress, reverting the
