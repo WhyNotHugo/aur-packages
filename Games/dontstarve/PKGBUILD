@@ -1,7 +1,7 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=dontstarve
-pkgver=1396059163
+pkgver=july21
 _curlver=7.23.0
 pkgrel=1
 pkgdesc="An open world survival video game."
@@ -16,7 +16,7 @@ source=("${pkgname}_x64_$pkgver.tar.gz::"
         "http://curl.haxx.se/download/curl-${_curlver}.tar.gz"
         "dontstarve.sh"
         "dontstarve.desktop")
-md5sums=('7d5e1d6f66ec76eae96ab8af2673f600'
+md5sums=('20907561ae855bb08d919c59d18b2a82'
          '018a9acee77ed70017c6f6cec855635a'
          'f2949327f3778ffbefb68fb61c10aee7'
          'e1211feede8e6b0ce174cd56517f4689')
