@@ -11,7 +11,7 @@ license=('BSD')
 depends=('libevent' 'openssl')
 provides=('libasr')
 options=(!strip)
-source=("git+ssh://git@github.com/OpenSMTPD/libasr")
+source=("git+https://git@github.com/OpenSMTPD/libasr")
 sha256sums=('SKIP')
 
 pkgver() {
