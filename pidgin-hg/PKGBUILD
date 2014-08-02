@@ -1,0 +1,65 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+# Contributor: Sebastian Ullrich <echo c2ViYXN0aUBudWxscmkuY2gK|base64 -d>
+# Contributor: lishengming.zju <lishengming.zju@gmail.com>
+
+pkgname=pidgin-hg
+pkgver=latest
+pkgrel=1
+pkgdesc="Multi-protocol instant messaging client. Latest mercurial build."
+arch=('i686' 'x86_64')
+url="http://pidgin.im/"
+license=('GPL')
+depends=('startup-notification' 'gtkspell' 'libxss' 'libsm' 'hicolor-icon-theme'
+         'gstreamer0.10' 'libidn' 'dbus-glib' 'nss' 'webkitgtk3' 'json-glib')
+makedepends=('mercurial' 'python2' 'avahi' 'tk' 'ca-certificates' 'intltool')
+optdepends=('aspell: for spelling correction'
+            'avahi: Bonjour protocol support'
+            'ca-certificates: SSL CA certificates'
+            'python2-dbus: for purple-remote and purple-url-handler'
+            'tk: Tcl/Tk scripting support')
+provides=('pidgin' 'libpurple')
+conflicts=('pidgin' 'libpurple')
+replaces=('pidgin' 'libpurple')
+options=('!libtool')
+source=('pidgin::hg+https://hg.pidgin.im/pidgin/main')
+sha256sums=('SKIP')
+install=$pkgname.install
+
+pkgver() {
+  cd "$srcdir"/pidgin
+
+  hg identify -ni | awk 'BEGIN{OFS=".";} {print $2,$1}'
+}
+
+prepare() {
+  cd "$srcdir"/pidgin
+}
+
+build() {
+  cd "$srcdir"/pidgin
+
+  ./autogen.sh \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --disable-schemas-install \
+    --disable-gnutls \
+    --disable-doxygen \
+    --disable-nm \
+    --disable-vv \
+    --disable-meanwhile \
+    --disable-kwallet \
+    --with-python=/usr/bin/python2 \
+    --with-system-ssl-certs=/etc/ssl/certs
+  make
+}
+
+package(){
+  cd "${srcdir}"/pidgin
+
+  for _dir in libpurple pidgin doc share/sounds share/ca-certs m4macros po; do
+    make -C "$_dir" DESTDIR="$pkgdir" install
+  done
+  install -Dm644 pidgin.desktop "$pkgdir"/usr/share/applications/pidgin.desktop
+
+  rm "$pkgdir/usr/share/man/man1/finch.1"
+}
