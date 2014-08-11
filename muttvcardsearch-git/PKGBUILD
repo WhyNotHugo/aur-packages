@@ -11,6 +11,7 @@ url="https://github.com/tfl/muttvcardsearch"
 license=('GPL')
 depends=('curl' 'sqlite3')
 makedepends=('cmake')
+conflicts=("muttvcardsearch")
 provides=("muttvcardsearch")
 source=("git+https://git@github.com/tfl/muttvcardsearch.git")
 sha1sums=('SKIP')
