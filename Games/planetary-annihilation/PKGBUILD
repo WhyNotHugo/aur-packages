@@ -15,6 +15,7 @@ arch=("x86_64")
 url="http://www.uberent.com/pa/"
 license=("custom")
 depends=("alsa-lib" "gconf" "nss" "gtk2" "libtxc_dxtn" "rtmpdump")
+conflicts=("planetary-annihilation-pte")
 options=("!libtool" "!strip")
 source=(PA_Linux_${_realver}.tar.bz2::
         CoherentUI_Host
