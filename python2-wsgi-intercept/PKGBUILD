@@ -12,7 +12,7 @@ depends=('python2')
 source=("http://pypi.python.org/packages/source/w/wsgi_intercept/wsgi_intercept-$pkgver.tar.gz")
 md5sums=('791abe4c1c7200dc5e205163acc9d110')
 
-build() {
+package() {
   cd "$srcdir/wsgi_intercept-$pkgver"
   python2 setup.py install --prefix=/usr --root="$pkgdir"
 }
