@@ -3,20 +3,24 @@
 
 pkgname=ubuntu-themes-wildblueyonder
 _pkgname=ubuntu-themes
-pkgver=14.04+14.04.20140402
+_actual_ver=14.04
+_extra_ver=+14.10.20140929
+pkgver=${_actual_ver}${_extra_ver}
+# pkgver=${_actual_ver}${_extra_ver/\+/.}
 pkgrel=1
 pkgdesc="Ambiance and Radiance themes, with a slight colour variation."
-arch=('any')
+arch=(any)
 url="https://launchpad.net/ubuntu-themes"
-license=("CCPL")
-depends=("gtk-engine-murrine" "gtk3" "gtk-engine-unico")
-makedepends=('python2' 'imagemagick' 'icon-naming-utils')
-source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_${pkgver}.orig.tar.gz
+license=(CCPL)
+depends=(humanity-icon-theme gnome-icon-theme hicolor-icon-theme
+         gtk-engine-unico gtk-engine-murrine)
+makedepends=(python2 imagemagick icon-naming-utils)
+provides=(ubuntu-themes ubuntu-mono)
+conflicts=(ubuntu-themes ubuntu-mono)
+install=${pkgname}.install
+source=("https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_${_actual_ver}${_extra_ver}.orig.tar.gz"
         gtk2.patch gtk3.patch)
-conflicts=("ubuntu-themes" "ubuntu-mono" "light-themes-wildblueyonder")
-provides=("ubuntu-themes" "light-themes-wildblueyonder")
-replaces=("light-themes-wildblueyonder")
-md5sums=('9f5b751c1a072708ae2d1d3618eb4f01'
+md5sums=('268d1c4a3ef375400f1cb990c4b635e0'
          '82ca564f78217c88358fedc5003bf149'
          'b3808ebed9a637971a934646349cde69')
 
@@ -38,16 +42,21 @@ package () {
 
   cd "$srcdir"/${_pkgname}-${pkgver}/
 
+  # Install themes
   install -dm755   "${pkgdir}/usr/share/themes/"
   cp -rp "Ambiance" "$pkgdir/usr/share/themes"
   cp -rp "Radiance" "$pkgdir/usr/share/themes"
 
-  sed -i -e "/shadow radius/d" "$pkgdir/usr/share/themes/Ambiance/metacity-1/metacity-theme-1.xml"
-  sed -i -e "/shadow radius/d" "$pkgdir/usr/share/themes/Radiance/metacity-1/metacity-theme-1.xml"
-  sed -i -e "/padding/d" "$pkgdir/usr/share/themes/Ambiance/metacity-1/metacity-theme-1.xml"
-  sed -i -e "/padding/d" "$pkgdir/usr/share/themes/Radiance/metacity-1/metacity-theme-1.xml"
+  # Install icons
+  install -dm755            "${pkgdir}/usr/share/icons/"
+  cp -av ubuntu-mono-dark/  "${pkgdir}/usr/share/icons/"
+  cp -av ubuntu-mono-light/ "${pkgdir}/usr/share/icons/"
+  cp -av LoginIcons/        "${pkgdir}/usr/share/icons/"
+  cp -av suru-icons/        "${pkgdir}/usr/share/icons/"
+  cp -av ubuntu-mobile/     "${pkgdir}/usr/share/icons/"
 
-  sed -i -e "/trough/d" "$pkgdir/usr/share/themes/Ambiance/metacity-1/metacity-theme-1.xml"
-  sed -i -e "/trough/d" "$pkgdir/usr/share/themes/Radiance/metacity-1/metacity-theme-1.xml"
+  mv "${pkgdir}"/usr/share/icons/{suru-icons,suru}/
 
+  install -Dm644 distributor-logo.png \
+    "${pkgdir}/usr/share/icons/hicolor/48x48/apps/distributor-logo.png"
 }
