@@ -6,34 +6,31 @@
 # Contributer: Bluthund <bluthund23@gmail.com>
 
 pkgname=caffeine-systray
-pkgver=2.4.1.r543.becf5e9
+_gitname=taurine
+pkgver=2.5
 pkgrel=1
-pkgdesc="Latest version supporting systray. Bugfix branch."
+# epoch was already set to 1 when I adopted it.
+epoch=1
+pkgdesc="Fork of caffeine that maintains systray support."
 arch=(any)
-url=https://launchpad.net/caffeine
+url=https://github.com/hobarrera/taurine
 license=(GPL3)
 depends=(dconf gtk2 hicolor-icon-theme kaa-metadata python2-dbus
          python2-gobject python2-notify python2-xdg python2-xlib)
-conflicts=(caffeine caffeine-bzr)
-provides=(caffeine)
+conflicts=(caffeine caffeine-bzr caffeine-oneclick)
+provides=(caffeine caffeine-bzr caffeine-oneclick)
+replaces=(caffeine-oneclick)
 makedepends=(git)
 options=(!emptydirs !libtool)
 install=$pkgname.install
-source=($pkgname::git+https://github.com/hobarrera/taurine.git)
-sha256sums=('SKIP')
-
-pkgver() {
-    cd "$pkgname"
-    echo $(cat VERSION).$(printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)")
-}
-
+source=(https://github.com/hobarrera/$_gitname/archive/v$pkgver.zip)
+sha256sums=('50f5447bc8425215ed4b7992f1574099eab4d55bb1175f4966650715fa85d125')
 prepare() {
-    cd $pkgname/
+    cd $_gitname-$pkgver/
     find -name '*.py' -type f -exec sed -ri 's:^#!/usr/bin/(env )?python$:&2:' '{}' \;
-    chmod +x setup.py
 }
 
 package() {
-    cd $pkgname/
-    ./setup.py install --root="$pkgdir"
+    cd $_gitname-$pkgver/
+    python2 setup.py install --root="$pkgdir"
 }
