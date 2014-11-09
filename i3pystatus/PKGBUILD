@@ -3,7 +3,7 @@
 pkgname=i3pystatus
 pkgdesc="i3status replacement written in python for the i3 window manager"
 pkgver=3.31
-pkgrel=3
+pkgrel=4
 arch=('i686' 'x86_64')
 license=('mit')
 depends=('python')
@@ -16,7 +16,8 @@ optdepends=('python-pyalsaaudio: For the alsa module.',
             'python-cssselect: For the parcel module.',
             'python-lxml: For the parcel module.',
             'python-pywapi: For the weather module.',
-            'python-basiciw: For the wireless module.')
+            'python-basiciw: For the wireless module.'
+            'python-colour: For the pulseaudio module.')
 url="https://github.com/enkore/i3pystatus"
 source=("https://github.com/enkore/i3pystatus/archive/$pkgver.tar.gz")
 md5sums=('2e082f2a93bf969d682e8b9196491123')
