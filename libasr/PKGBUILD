@@ -1,7 +1,7 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=libasr
-pkgver=201410012101
+pkgver=201411201818
 pkgrel=1
 pkgdesc='A FREE asynchronous DNS resolver.'
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ depends=('libevent' 'openssl')
 provides=('libasr')
 options=(!strip)
 source=("http://www.opensmtpd.org/archives/$pkgname-$pkgver.tar.gz")
-sha256sums=('6347ac9e37880542d6adfa281f38f0f85ac5e9d1337a121204151e7271793c8a')
+sha256sums=('92b801f9dff4f597137f0dacb7a3c4c3b6b76945696449df0647eb268e087373')
 
 prepare() {
   cd "$srcdir/$pkgname-$pkgver"
