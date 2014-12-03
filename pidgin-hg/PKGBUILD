@@ -4,29 +4,22 @@
 
 pkgname=('pidgin-hg' 'libpurple-hg' 'finch-hg')
 _hgname=pidgin
-pkgver=latest
+pkgver=36282.6a8f7f4ec06f
 pkgrel=1
 pkgdesc="Multi-protocol instant messaging client. Latest mercurial build."
 arch=('i686' 'x86_64')
 url="http://pidgin.im/"
 license=('GPL')
-depends=('startup-notification' 'gtkspell' 'libxss' 'libsm' 'hicolor-icon-theme'
-         'gstreamer0.10' 'libidn' 'dbus-glib' 'nss' 'webkitgtk' 'json-glib'
-         'farstream' 'libgnome-keyring')
 makedepends=('mercurial' 'python2' 'avahi' 'tk' 'ca-certificates' 'intltool'
              'tk' 'ca-certificates' 'intltool' 'networkmanager')
-optdepends=('aspell: for spelling correction'
-            'avahi: Bonjour protocol support'
-            'ca-certificates: SSL CA certificates'
-            'python2-dbus: for purple-remote and purple-url-handler'
-            'tk: Tcl/Tk scripting support')
-provides=('pidgin' 'libpurple')
-conflicts=('pidgin' 'libpurple')
-replaces=('pidgin' 'libpurple')
+makedepends+=('startup-notification' 'gtkspell' 'libxss' 'libsm'
+              'hicolor-icon-theme' 'dbus-glib' 'webkitgtk3' 'json-glib')
+makedepends+=('farstream' 'libsasl' 'libidn' 'dbus-glib' 'nss'
+              'libgnome-keyring')
+makedepends+=('libx11' 'python2')
 options=('!libtool')
 source=('pidgin::hg+https://hg.pidgin.im/pidgin/main')
 sha256sums=('SKIP')
-install=$pkgname.install
 
 pkgver() {
   cd "$srcdir"/pidgin
@@ -58,10 +51,12 @@ build() {
 
 package_pidgin-hg() {
   pkgdesc="Multi-protocol instant messaging client"
-  depends=('libpurple' 'startup-notification' 'gtkspell' 'libxss' 'libsm'
+  depends=('libpurple-hg' 'startup-notification' 'gtkspell' 'libxss' 'libsm'
            'hicolor-icon-theme' 'dbus-glib' 'webkitgtk3' 'json-glib')
   optdepends=('aspell: for spelling correction')
-  install=pidgin.install
+  install=$pkgname.install
+  provides=('pidgin')
+  conflicts=('pidgin')
 
   cd "$srcdir"/$_hgname
 
@@ -71,7 +66,7 @@ package_pidgin-hg() {
   make -C pidgin DESTDIR="$pkgdir" install
   make -C doc DESTDIR="$pkgdir" install
 
-  # Remove files that are packaged in libpurle
+  # Remove files that are packaged in libpurple
   make -C libpurple DESTDIR="$pkgdir" uninstall-libLTLIBRARIES
 
   install -Dm644 pidgin/data/pidgin.desktop "$pkgdir"/usr/share/applications/pidgin.desktop
@@ -81,11 +76,14 @@ package_pidgin-hg() {
 
 package_libpurple-hg() {
   pkgdesc="IM library extracted from Pidgin"
-  depends=('farstream-0.1' 'libsasl' 'libidn' 'dbus-glib' 'nss')
+  depends=('farstream' 'libsasl' 'libidn' 'dbus-glib' 'nss'
+           'libgnome-keyring')
   optdepends=('avahi: Bonjour protocol support'
               'ca-certificates: SSL CA certificates'
               'python2-dbus: for purple-remote and purple-url-handler'
               'tk: Tcl/Tk scripting support')
+  provides=('libpurple')
+  conflicts=('libpurple')
 
   cd "$srcdir"/$_hgname
 
@@ -100,7 +98,9 @@ package_libpurple-hg() {
 
 package_finch-hg() {
   pkgdesc="A ncurses-based messaging client"
-  depends=("libpurple=$pkgver-$pkgrel" 'libx11' 'python2')
+  depends=("libpurple-hg=$pkgver-$pkgrel" 'libx11' 'python2')
+  provides=('finch')
+  conflicts=('finch')
 
   cd "$srcdir"/$_hgname
 
@@ -110,7 +110,7 @@ package_finch-hg() {
   make -C finch DESTDIR="$pkgdir" install
   make -C doc DESTDIR="$pkgdir" install
 
-  # Remove files that are packaged in libpurle
+  # Remove files that are packaged in libpurple
   make -C libpurple DESTDIR="$pkgdir" uninstall-libLTLIBRARIES
 
   rm "$pkgdir"/usr/share/man/man1/pidgin.1
