@@ -8,9 +8,6 @@ pkgdesc="An open world survival video game."
 arch=("i686" "x86_64")
 url="http://www.dontstarvegame.com/"
 license=('Custom')
-depends=()
-makedepends=()
-optdepends=()
 options=(!strip)
 source=("${pkgname}_x64_$pkgver.tar.gz::"
         "http://curl.haxx.se/download/curl-${_curlver}.tar.gz"
@@ -24,6 +21,7 @@ PKGEXT=".pkg.tar"
 
 build() {
   cd "$srcdir/curl-${_curlver}"
+
   ./configure
   make
 }
