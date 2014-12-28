@@ -5,7 +5,7 @@
 pkgname=python2-pyside-tools
 _gitname=Tools
 pkgver=0.2.15
-pkgrel=2
+pkgrel=3
 _pyver=2.7
 pkgdesc="UI Compiler (pyside-uic) plus Qt Resource Compiler (pyside-rcc4) for PySide."
 arch=('i686' 'x86_64')
@@ -18,22 +18,32 @@ source=("https://github.com/PySide/Tools/archive/${pkgver}.tar.gz")
 md5sums=('e542b9536bd9d35599ede225c9311cc8')
 
 build(){
-    cd $srcdir/${_gitname}-$pkgver
-    sed -e "s/python/python2/g" -i pyside-uic
-    mkdir -p build && cd build
-    _pyver=2.7
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr \
-              -DCMAKE_BUILD_TYPE=Release \
-	      -DSHIBOKEN_PYTHON_SUFFIX=-python$_pyver \
-	      -DPYTHON_EXECUTABLE=/usr/bin/python$_pyver \
-              -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
-              -DPYTHON_BASENAME=-python$_pyver \
-              -DPYTHON_SUFFIX=-python2.7
-    make
+  cd $srcdir/${_gitname}-$pkgver
+  sed -e "s/python/python2/g" -i pyside-uic
+  mkdir -p build && cd build
+  cmake ../ -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DSHIBOKEN_PYTHON_SUFFIX=-python$_pyver \
+            -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+            -DPYTHON_BASENAME=-python$_pyver \
+            -DPYTHON_SUFFIX=-python2.7
+  make
 }
 
 package(){
-    cd $srcdir/${_gitname}-$pkgver/build
-	make DESTDIR=$pkgdir install
+  cd $srcdir/${_gitname}-$pkgver/build
+  make DESTDIR=$pkgdir install
+
+  # Rename pyside -> pyside2
+  mv "$pkgdir/usr/bin/pyside-lupdate" "$pkgdir/usr/bin/pyside2-lupdate"
+  mv "$pkgdir/usr/bin/pyside-rcc" "$pkgdir/usr/bin/pyside2-rcc"
+  mv "$pkgdir/usr/bin/pyside-uic" "$pkgdir/usr/bin/pyside2-uic"
+
+  mv "$pkgdir/usr/share/man/man1/pyside-uic.1.gz" \
+     "$pkgdir/usr/share/man/man1/pyside2-uic.1.gz"
+  mv "$pkgdir/usr/share/man/man1/pyside-rcc" \
+     "$pkgdir/usr/share/man/man1/pyside2-rcc"
+  mv "$pkgdir/usr/share/man/man1/pyside-lupdate" \
+     "$pkgdir/usr/share/man/man1/pyside2-lupdate"
 }
 
