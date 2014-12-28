@@ -10,6 +10,7 @@ arch=(any)
 url='http://ppladdressbook.org'
 license=(GPL2)
 depends=(ruby-colored ruby-inifile-2 ruby-mail-2.5.3 ruby-morphine ruby-rugged-0.17.0.b6 ruby-greencard)
+optdepends=('git: for ppl remote.')
 options=(!emptydirs)
 replaces=('ruby-ppl')
 conflicts=('ruby-ppl')
