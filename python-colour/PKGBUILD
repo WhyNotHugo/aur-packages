@@ -11,7 +11,7 @@ license=('MIT')
 depends=('python')
 makedepends=('python-setuptools')
 # autogen.sh requires git metadata, so a tarball isn't useful.
-source=("git://git+https://github.com/vaab/$_pyname#tag=$pkgver")
+source=("git+https://github.com/vaab/$_pyname#tag=$pkgver")
 md5sums=('SKIP')
 
 package() {
