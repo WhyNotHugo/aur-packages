@@ -2,8 +2,8 @@
 # Contributor: Loui Chang <louipc dot ist at NOSPAM gmail dot com>
 
 pkgname=mutt-kz
-pkgver=latest
-_muttver=1.5.23.1
+pkgver=1.5.23.1rc1
+_pkgver=1.5.23.1-rc1
 pkgrel=1
 pkgdesc="Mutt with notmuch support and another improvements."
 url="https://github.com/karelzak/mutt-kz"
@@ -14,16 +14,11 @@ makedepends=('git' 'gnupg' 'libxslt')
 conflicts=('mutt')
 provides=('mutt')
 options=('!strip')
-source=('git+ssh://git@github.com/karelzak/mutt-kz.git')
-md5sums=('SKIP')
-
-pkgver() {
-  cd "$srcdir/$pkgname"
-  echo ${_muttver}.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
-}
+source=("https://github.com/karelzak/$pkgname/archive/v$_pkgver.tar.gz")
+md5sums=('34568489032ae91a2dc21327eb412ff7')
 
 build() {
-  cd "$srcdir/$pkgname"
+  cd "$srcdir/$pkgname-$_pkgver"
 
   ././prepare
   ./configure --enable-notmuch \
@@ -46,7 +41,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$pkgname"
+  cd "$srcdir/$pkgname-$_pkgver"
   make DESTDIR="$pkgdir" install
 
   rm "${pkgdir}"/usr/bin/{flea,muttbug}
