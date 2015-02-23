@@ -1,0 +1,29 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+# Contributor: Limao Luo <luolimao+AUR@gmail.com>
+# Contributor: flan_suse <windows2linux@zoho.com>
+
+pkgname=elementary-xfce-icons
+_pkgname=elementary-xfce
+pkgver=0.5
+pkgrel=1
+pkgdesc='Elementary icons forked, extended and maintained for Xfce.'
+arch=(any)
+url=https://github.com/shimmerproject/elementary-xfce
+license=(GPL2)
+depends=(gnome-icon-theme)
+options=(!strip)
+conflicts=($pkgname-git)
+optdepends=('xfce-theme-albatross: matching Shimmer Project Xfce theme'
+            'xfce-theme-bluebird: matching Shimmer Project Xfce theme'
+            'xfce-theme-greybird: matching Shimmer Project Xfce theme')
+source=($pkgname-$pkgver.tar.gz::https://github.com/shimmerproject/${pkgname%-*}/archive/v$pkgver.tar.gz)
+source=("https://github.com/shimmerproject/$_pkgname/archive/v$pkgver.zip")
+sha256sums=('0f27cf6806790d4a1cb6aae7996fc7694331f458c5569a2692f97968b385bfe6')
+
+package() {
+  cd ${pkgname%-*}-$pkgver
+
+  find ${_pkgname}{,-dark} -type f -exec \
+    install -Dm 644 {} "$pkgdir/usr/share/icons/{}" \;
+  install -Dm644 README "$pkgdir"/usr/share/doc/$pkgname/README
+}
