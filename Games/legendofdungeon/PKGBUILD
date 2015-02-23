@@ -5,28 +5,30 @@
 # this package.
 
 pkgname=legendofdungeon
-pkgver=AlphaNymph
+pkgver=Unicorn
 pkgrel=1
 pkgdesc="A 4 Player Co-op Rogue-Like-like Beat'em'up with Dynamic Lighting on AWESOME Pixel Art."
+group=("games")
 arch=("x86_64")
 url="http://www.robotloveskitty.com/LoD/"
 license=('custom')
-depends=()
-makedepends=("unzip")
+depends=(lib32-libxdmcp lib32-libxau lib32-libxrender lib32-libdrm
+         lib32-libxxf86vm lib32-libxshmfence lib32-libxcb lib32-libx11
+         lib32-libxfixes lib32-libxdamage lib32-mesa lib32-expat lib32-glibc
+         lib32-gcc-libs lib32-glibc lib32-libxcursor lib32-libxext lib32-libx11
+         lib32-mesa-libgl lib32-glu lib32-gcc-libs)
 source=(LegendofDungeon-Linux-${pkgver}.zip::)
-md5sums=('679161abd18634d7c1ffe8320311cd09')
+md5sums=('87c9099e06a446b8159454b9a03a5912')
+PKGEXT=".pkg.tar"
 
 package() {
   cd "$srcdir/LegendofDungeon-Linux"
 
-  if [[ $CARCH == i686 ]]; then
-    install -Dm 755 LegendofDungeon.x86 "${pkgdir}/opt/LegendofDungeon/LegendofDungeon"
-  else
-    install -Dm 755 LegendofDungeon.x86_64 "${pkgdir}/opt/LegendofDungeon/LegendofDungeon"
-  fi
+  install -Dm 755 LegendofDungeon.x86 "${pkgdir}/opt/LegendofDungeon/LegendofDungeon"
 
-  find LegendofDungeon_Data -type f -exec install -Dm 644 {} "${pkgdir}/opt/LegendofDungeon/{}" \;
+  find LegendofDungeon_Data -type f -exec \
+    install -Dm 644 {} "${pkgdir}/opt/LegendofDungeon/{}" \;
 
   install -d "${pkgdir}/usr/bin/"
-  ln -s "${pkgdir}/opt/LegendofDungeon/LegendofDungeon" "${pkgdir}/usr/bin/legendofdungeon"
+  ln -s "/opt/LegendofDungeon/LegendofDungeon" "${pkgdir}/usr/bin/legendofdungeon"
 }
