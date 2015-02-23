@@ -5,7 +5,7 @@
 pkgname=elementary-xfce-icons
 _pkgname=elementary-xfce
 pkgver=0.5
-pkgrel=2
+pkgrel=3
 pkgdesc='Elementary icons forked, extended and maintained for Xfce.'
 arch=(any)
 url=https://github.com/shimmerproject/elementary-xfce
@@ -24,6 +24,7 @@ package() {
   cd ${pkgname%-*}-$pkgver
 
   install -d "$pkgdir/usr/share/icons"
-  rsync -rl ${_pkgname}{,-dark} "$pkgdir/usr/share/icons"
+  cp -r ${_pkgname}{,-dark} "$pkgdir/usr/share/icons"
+
   install -Dm644 README "$pkgdir"/usr/share/doc/$pkgname/README
 }
