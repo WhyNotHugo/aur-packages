@@ -10,6 +10,7 @@ pkgname=planetary-annihilation
 pkgver=76766
 pkgrel=1
 pkgdesc="RTS gameplay in a way that's never been seen before."
+group=("games")
 arch=("x86_64")
 url="http://www.uberent.com/pa/"
 license=("custom")

@@ -4,6 +4,7 @@ pkgname=planetary-annihilation-pte
 pkgver=latest
 pkgrel=3
 pkgdesc="Planetary Annihilation Public Test Environment Launcher"
+group=("games")
 arch=('x86_64')
 url="https://forums.uberent.com/threads/streams-pte-and-experimental-builds.58960/page-4#post-937028"
 license=('MIT')

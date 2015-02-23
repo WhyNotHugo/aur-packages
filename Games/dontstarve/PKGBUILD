@@ -5,6 +5,7 @@ pkgver=july21
 _curlver=7.23.0
 pkgrel=1
 pkgdesc="An open world survival video game."
+group=("games")
 arch=("i686" "x86_64")
 url="http://www.dontstarvegame.com/"
 license=('Custom')
