@@ -1,0 +1,21 @@
+# Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
+
+pkgname=git-crypt
+pkgver=0.4.2
+pkgrel=1
+pkgdesc="Transparent file encryption in git."
+arch=("x86_64" "i386")
+url="https://github.com/AGWA/git-crypt"
+license=('GPL3')
+source=("https://github.com/AGWA/$pkgname/archive/$pkgver.tar.gz")
+md5sums=('200bc44b90107750eaad77be038ed496')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make
+}
+
+package() {
+  install -Dm 755 "$srcdir/$pkgname-$pkgver/git-crypt" \
+    "$pkgdir/usr/bin/git-crypt"
+}
