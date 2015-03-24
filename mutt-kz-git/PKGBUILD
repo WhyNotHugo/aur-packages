@@ -3,8 +3,7 @@
 
 pkgname=mutt-kz-git
 _pkgname=mutt-kz
-pkgver=1.5.23.1.5861.7d0217a
-_muttver=1.5.23.1
+pkgver=latest
 pkgrel=1
 pkgdesc="Mutt with notmuch support and another improvements."
 url="https://github.com/karelzak/mutt-kz"
@@ -15,18 +14,25 @@ makedepends=('git' 'gnupg' 'libxslt')
 conflicts=('mutt')
 provides=('mutt')
 options=('!strip')
-source=('git+ssh://git@github.com/karelzak/mutt-kz.git')
+source=('git+https://github.com/karelzak/mutt-kz.git')
 md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  echo ${_muttver}.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+  ( set -o pipefail
+    git describe --long --tags 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  ./prepare
 }
 
 build() {
   cd "$srcdir/$_pkgname"
 
-  ././prepare
   ./configure --enable-notmuch \
     --prefix=/usr \
     --sysconfdir=/etc \
