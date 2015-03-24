@@ -13,7 +13,7 @@ depends=('dbus-glib' 'libxss' 'libx11' 'libxext' 'xorg-xbacklight')
 makedepends=('git')
 conflicts=(lightum)
 provides=(lightum)
-source=("git+http://github.com/poliva/lightum.git")
+source=("git+https://github.com/esoleyman/lightum.git")
 md5sums=('SKIP')
 
 pkgver() {
