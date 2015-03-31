@@ -1,6 +1,7 @@
 # Maintainer: Hugo Osvaldo Barrera <hugo@barrera.io>
 
 pkgname=caffeine-ng-git
+_pkgname=caffeine-ng
 pkgver=latest
 pkgrel=1
 pkgdesc="Status bar application able to temporarily inhibit the screensaver and sleep mode."
@@ -18,12 +19,20 @@ install=$pkgname.install
 source=("git+https://git.barrera.io/hobarrera/caffeine-ng.git")
 sha256sums=('SKIP')
 
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  ( set -o pipefail
+    git describe --long --tags 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
 build() {
-  cd $pkgname
+  cd $_pkgname
   python setup.py build
 }
 
 package() {
-  cd $pkgname
+  cd $_pkgname
   python setup.py install --root="$pkgdir"
 }
